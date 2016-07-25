@@ -1,6 +1,6 @@
 {
   "name": "pw-transifex",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "NodeJS Transifex API Client forked from transifex node module",
   "main": "./transifex.js",
   "scripts": {
