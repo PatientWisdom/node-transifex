@@ -214,23 +214,9 @@ describe("Translations API", function () {
     }).not.throw();
   });
 
-  it("translationStringsMethod", function (done) {
+  it("translateString", function (done) {
     should(function(){
-      transifex.translationStringsMethod("node-transifex-sample", "source-file", "de", "test", function(err, data) {
-        try {
-          data = JSON.parse(data);
-          data[0].should.have.properties('comment', 'context', 'tags', 'source_string', 'translation', 'last_update');
-        } catch(e) {
-          done();
-        }
-        done();
-      });
-    }).not.throw();
-  });
-
-  it("translationStringsMethod specific string", function (done) {
-    should(function(){
-      transifex.translationStringsMethod("node-transifex-sample", "source-file", "de", "This is cool. Super Cool!", function(err, data) {
+      transifex.translateString("source-file", "de", "This is cool. Super Cool!", function(err, data) {
         try {
           data = JSON.parse(data);
           data[0].should.have.properties('comment', 'context', 'tags', 'source_string', 'translation', 'last_update');

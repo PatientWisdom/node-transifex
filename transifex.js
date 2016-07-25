@@ -420,14 +420,16 @@ Transifex.prototype.translationInstanceMethod = function(project_slug, resource_
   });
 };
 
-
-Transifex.prototype.translationStringsMethod = function(project_slug, resource_slug, language_code, string_key, callback) {
-  project_slug = project_slug || this.projectSlug || "webmaker";
-  string_key = md5(string_key) || '';
-  var url = this.expUrl.translationStringsURL.replace("<project_slug>", project_slug)
-                                        .replace("<resource_slug>", resource_slug)
-                                        .replace("<language_code>", language_code)
-                                        .replace("<string_key>", string_key ? "&key=" + string_key : '');
+/**
+ * Fetch the Transifex translation object for the provided string from a resouce for the provided language_code.
+ */
+Transifex.prototype.translateString = function(resourceSlug, languageCode, stringToTranslate, callback) {
+  if (!stringToTranslate) throw new Error('No string provided!');
+  stringKey = md5(stringToTranslate);
+  var url = this.expUrl.translationStringsURL.replace("<project_slug>", this.projectSlug)
+                                        .replace("<resource_slug>", resourceSlug)
+                                        .replace("<language_code>", languageCode)
+                                        .replace("<string_key>", "&key=" + stringKey);
   this.projectRequest(url, function(err, content) {
     if (err) {
       return callback(err);
