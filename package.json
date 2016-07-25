@@ -30,6 +30,7 @@
   "dependencies": {
     "commander": "~2.1.0",
     "lodash": "~2.4.1",
+    "md5": "^2.1.0",
     "mkpath": "~0.1.0",
     "mocha": "~1.15.1",
     "request": "2.34.0",
