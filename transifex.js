@@ -9,6 +9,10 @@ function Transifex(options) {
   this.expUrl = require("./url")(this.projectSlug).API;
 };
 
+function isValidMD5(string) {
+  return string.match(/[a-fA-F0-9]{32}/);
+}
+
 // request the project details based on the url provided
 Transifex.prototype.projectRequest = function(url, options, callback) {
   var fileTypeContent;
@@ -422,10 +426,11 @@ Transifex.prototype.translationInstanceMethod = function(project_slug, resource_
 
 /**
  * Fetch the Transifex translation object for the provided string from a resouce for the provided language_code.
+ * Expects Transifex keys to be MD5 format.  Will check and convert string to MD5.
  */
 Transifex.prototype.translateString = function(resourceSlug, languageCode, stringToTranslate, callback) {
   if (!stringToTranslate) throw new Error('No string provided!');
-  stringKey = md5(stringToTranslate);
+  stringKey = isValidMD5(stringToTranslate) ? stringToTranslate : md5(stringToTranslate);
   var url = this.expUrl.translationStringsURL.replace("<project_slug>", this.projectSlug)
                                         .replace("<resource_slug>", resourceSlug)
                                         .replace("<language_code>", languageCode)
