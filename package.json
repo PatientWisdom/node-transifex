@@ -1,14 +1,14 @@
 {
-  "name": "transifex",
+  "name": "pw-transifex",
   "version": "1.4.4",
-  "description": "NodeJS Transifex API Client",
+  "description": "NodeJS Transifex API Client forked from transifex node module",
   "main": "./transifex.js",
   "scripts": {
     "test": "mocha --reporter spec tests --timeout 190000 --slow 2000"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/alicoding/node-transifex.git"
+    "url": "git://github.com/PatientWisdom/node-transifex.git"
   },
   "bin": {
     "transifex": "./bin/index.js"
