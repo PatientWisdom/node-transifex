@@ -302,18 +302,17 @@ transifex.translationInstanceMethod("webmaker", "profile", "zh_CN", { mode: "rev
 
 **Note:** The responded content is not parsed.
 
-#### translationStringsMethod
+#### translateString
 
-The `translationStringsMethod` function returns the requested translation strings, if they exists. The translation strings are returned as `json`.
-The `string-to-translate` parameter is optional. If this is not provided, the request will return all strings for the specified language code.
+The `translateString` method returns the requested translation string, if it exists. The translation strings are returned as array of `json` objects.
 
 ``` javascript
-transifex.translationStringsMethod("webmaker", "profile", "cs", "string-to-translate", function(err, data) {
+transifex.translateString("resourceSlug", "languageCode", "stringToTranslate", function(err, data) {
   ...
 });
 ```
 
-**Note:** The returned content is not parsed.
+**Note:** This function expects the string keys on Transifex to be in MD5 format.
 
 ### Statistics API
 
