@@ -1,5 +1,6 @@
 var request = require("request"),
-    _ = require("lodash");
+    _ = require("lodash"),
+    md5 = require("md5");
 
 function Transifex(options) {
   this.projectSlug = options.project_slug || "webmaker";
@@ -422,7 +423,7 @@ Transifex.prototype.translationInstanceMethod = function(project_slug, resource_
 
 Transifex.prototype.translationStringsMethod = function(project_slug, resource_slug, language_code, string_key, callback) {
   project_slug = project_slug || this.projectSlug || "webmaker";
-  string_key = string_key || '';
+  string_key = md5(string_key) || '';
   var url = this.expUrl.translationStringsURL.replace("<project_slug>", project_slug)
                                         .replace("<resource_slug>", resource_slug)
                                         .replace("<language_code>", language_code)
