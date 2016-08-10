@@ -1,18 +1,16 @@
 node-transifex
 =====================
 
-[![Build Status](https://travis-ci.org/alicoding/node-transifex.png)](https://travis-ci.org/alicoding/node-transifex)
-
 [Transifex](http://www.transifex.com) API client for nodejs
 
 Install the node.js module using npm:
 
-`$ npm install transifex`
+`$ npm install pw-transifex`
 
 Initialize the module with your credential and project name for the first time
 
 ``` javascript
-var Transifex = require("transifex");
+var Transifex = require("pw-transifex");
 
 var transifex = new Transifex({
 	project_slug: "projectName",
@@ -311,8 +309,6 @@ transifex.translateString("resourceSlug", "languageCode", "stringToTranslate", f
   ...
 });
 ```
-
-**Note:** This function expects the string keys on Transifex to be in MD5 format.
 
 ### Statistics API
 
