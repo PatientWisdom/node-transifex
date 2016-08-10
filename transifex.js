@@ -1,6 +1,5 @@
 var request = require("request"),
-    _ = require("lodash"),
-    md5 = require("md5");
+    _ = require("lodash");
 
 function Transifex(options) {
   this.projectSlug = options.project_slug || "webmaker";
@@ -8,10 +7,6 @@ function Transifex(options) {
   this.authHeader = "Basic " + new Buffer(this.userAuth).toString("base64");
   this.expUrl = require("./url")(this.projectSlug).API;
 };
-
-function isValidMD5(string) {
-  return string.match(/[a-fA-F0-9]{32}/);
-}
 
 // request the project details based on the url provided
 Transifex.prototype.projectRequest = function(url, options, callback) {
@@ -426,15 +421,13 @@ Transifex.prototype.translationInstanceMethod = function(project_slug, resource_
 
 /**
  * Fetch the Transifex translation object for the provided string from a resouce for the provided language_code.
- * Expects Transifex keys to be MD5 format.  Will check and convert string to MD5.
  */
 Transifex.prototype.translateString = function(resourceSlug, languageCode, stringToTranslate, callback) {
   if (!stringToTranslate) throw new Error('No string provided!');
-  stringKey = isValidMD5(stringToTranslate) ? stringToTranslate : md5(stringToTranslate);
   var url = this.expUrl.translationStringsURL.replace("<project_slug>", this.projectSlug)
                                         .replace("<resource_slug>", resourceSlug)
                                         .replace("<language_code>", languageCode)
-                                        .replace("<string_key>", "&key=" + stringKey);
+                                        .replace("<string_key>", "&key=" + stringToTranslate);
   this.projectRequest(url, function(err, content) {
     if (err) {
       return callback(err);
